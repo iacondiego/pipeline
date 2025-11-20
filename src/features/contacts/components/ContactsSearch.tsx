@@ -19,7 +19,8 @@ export function ContactsSearch({
     }, 300)
 
     return () => clearTimeout(timer)
-  }, [query, onSearch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query])
 
   const handleClear = () => {
     setQuery('')
