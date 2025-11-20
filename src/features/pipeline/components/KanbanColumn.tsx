@@ -25,7 +25,7 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
     <div
       ref={setNodeRef}
       className={`
-        flex flex-col h-full min-w-[360px] max-w-[420px] flex-shrink-0
+        flex flex-col h-full min-w-[280px] max-w-[320px] flex-shrink-0
         transition-all duration-200
         ${isOver ? `ring-2 ${colors.border.replace('border-', 'ring-')}` : ''}
       `}

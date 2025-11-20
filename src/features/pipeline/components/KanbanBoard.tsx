@@ -12,15 +12,17 @@ import {
   DragOverEvent,
   CollisionDetection
 } from '@dnd-kit/core'
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { usePipeline } from '../hooks/usePipeline'
-import { Lead, PipelineStage, PIPELINE_STAGES } from '../types'
+import { Lead, PipelineStage, PIPELINE_STAGES, StageColumn } from '../types'
 import { KanbanColumn } from './KanbanColumn'
 import { LeadCard } from './LeadCard'
+import { SearchBar } from './SearchBar'
 
 export function KanbanBoard() {
   const { getStageColumns, updateLeadStage, isLoading, error } = usePipeline()
   const [activeLead, setActiveLead] = useState<Lead | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -30,7 +32,44 @@ export function KanbanBoard() {
     })
   )
 
-  const columns = getStageColumns()
+  const allColumns = getStageColumns()
+
+  // Filtrar leads por búsqueda
+  const columns = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return allColumns
+    }
+
+    const query = searchQuery.toLowerCase()
+
+    return allColumns.map((column): StageColumn => {
+      const filteredLeads = column.leads.filter((lead) => {
+        return (
+          lead.nombres.toLowerCase().includes(query) ||
+          lead.phone.toLowerCase().includes(query) ||
+          lead.interes_propiedad.toLowerCase().includes(query)
+        )
+      })
+
+      // Recalcular propertyTypes para leads filtrados
+      const propertyTypes: Record<string, number> = {}
+      filteredLeads.forEach((lead) => {
+        const type = lead.interes_propiedad
+        propertyTypes[type] = (propertyTypes[type] || 0) + 1
+      })
+
+      return {
+        ...column,
+        leads: filteredLeads,
+        count: filteredLeads.length,
+        propertyTypes
+      }
+    })
+  }, [allColumns, searchQuery])
+
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query)
+  }, [])
 
   // Estrategia simple: usar closestCenter directamente
   const customCollisionDetection: CollisionDetection = (args) => {
@@ -239,6 +278,14 @@ export function KanbanBoard() {
   return (
     <div className="overflow-hidden bg-dark-900" style={{ height: 'calc(100vh - 76px)' }}>
       <div className="flex-1 flex flex-col overflow-hidden h-full">
+        {/* Barra de búsqueda */}
+        <div className="px-6 pt-6 pb-4">
+          <SearchBar
+            onSearch={handleSearch}
+            placeholder="Buscar por nombre, teléfono o tipo de propiedad..."
+          />
+        </div>
+
         <div className="flex-1 overflow-x-auto scrollbar-thin">
           <DndContext
             sensors={sensors}
@@ -247,7 +294,7 @@ export function KanbanBoard() {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
-            <div className="p-6 h-full">
+            <div className="px-6 pb-6 h-full">
               <div className="flex gap-6 h-full">
                 {columns.map((column) => (
                   <KanbanColumn key={column.id} column={column} />
