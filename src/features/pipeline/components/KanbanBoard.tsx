@@ -305,7 +305,7 @@ export function KanbanBoard() {
             <DragOverlay>
               {activeLead ? (
                 <div className="rotate-3 scale-105 shadow-2xl">
-                  <LeadCard lead={activeLead} />
+                  <LeadCard lead={activeLead} onUpdateNotes={updateLeadNotes} />
                 </div>
               ) : null}
             </DragOverlay>
