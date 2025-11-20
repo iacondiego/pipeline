@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { usePipeline } from '@/features/pipeline/hooks/usePipeline'
-import { PIPELINE_STAGES } from '@/features/pipeline/types'
-import { DashboardMetrics, StageMetric } from '../types'
+import { DashboardMetrics, PropertyMetric } from '../types'
 
 export function useDashboardMetrics() {
   const { leads, isLoading, error } = usePipeline()
@@ -32,25 +31,36 @@ export function useDashboardMetrics() {
     }
   }, [leads])
 
-  const stageMetrics = useMemo<StageMetric[]>(() => {
+  const propertyMetrics = useMemo<PropertyMetric[]>(() => {
     const totalLeads = leads.length
 
-    return PIPELINE_STAGES.map((stage) => {
-      const stageLeads = leads.filter((lead) => lead.stage === stage)
-      const count = stageLeads.length
-      const percentage = totalLeads > 0 ? (count / totalLeads) * 100 : 0
-
-      return {
-        stage,
-        count,
-        percentage,
+    // Agrupar por tipo de propiedad
+    const propertyGroups = leads.reduce((acc, lead) => {
+      const propertyType = lead.interes_propiedad || 'Sin especificar'
+      if (!acc[propertyType]) {
+        acc[propertyType] = []
       }
-    })
+      acc[propertyType].push(lead)
+      return acc
+    }, {} as Record<string, typeof leads>)
+
+    return Object.entries(propertyGroups)
+      .map(([propertyType, propertyLeads]) => {
+        const count = propertyLeads.length
+        const percentage = totalLeads > 0 ? (count / totalLeads) * 100 : 0
+
+        return {
+          propertyType,
+          count,
+          percentage,
+        }
+      })
+      .sort((a, b) => b.count - a.count) // Ordenar por cantidad descendente
   }, [leads])
 
   return {
     metrics,
-    stageMetrics,
+    propertyMetrics,
     isLoading,
     error,
   }

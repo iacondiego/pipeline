@@ -17,3 +17,9 @@ export interface TimeSeriesData {
   date: string
   count: number
 }
+
+export interface PropertyMetric {
+  propertyType: string
+  count: number
+  percentage: number
+}

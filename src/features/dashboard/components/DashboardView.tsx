@@ -2,12 +2,20 @@
 
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics'
 import { MetricCard } from './MetricCard'
-import { StageDistributionChart } from './StageDistributionChart'
-import { StageValueChart } from './StageValueChart'
-import { PipelineStage, STAGE_COLORS } from '@/features/pipeline/types'
+import { PropertyDistributionChart } from './PropertyDistributionChart'
+import { PropertyValueChart } from './PropertyValueChart'
+
+const PROPERTY_COLORS: Record<string, { text: string; accent: string; bg: string; border: string }> = {
+  Casa: { text: 'text-blue-400', accent: 'bg-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-700/50' },
+  Departamento: { text: 'text-amber-400', accent: 'bg-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-700/50' },
+  'Casa + Jardín': { text: 'text-emerald-400', accent: 'bg-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-700/50' },
+  'Sin especificar': { text: 'text-gray-400', accent: 'bg-gray-400', bg: 'bg-gray-500/10', border: 'border-gray-700/50' },
+}
+
+const DEFAULT_COLOR = { text: 'text-purple-400', accent: 'bg-purple-400', bg: 'bg-purple-500/10', border: 'border-purple-700/50' }
 
 export function DashboardView() {
-  const { metrics, stageMetrics, isLoading, error } = useDashboardMetrics()
+  const { metrics, propertyMetrics, isLoading, error } = useDashboardMetrics()
 
   if (isLoading) {
     return (
@@ -146,27 +154,27 @@ export function DashboardView() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StageDistributionChart data={stageMetrics} />
-        <StageValueChart data={stageMetrics} />
+        <PropertyDistributionChart data={propertyMetrics} />
+        <PropertyValueChart data={propertyMetrics} />
       </div>
 
       <div className="card-glass rounded-xl p-6">
-        <h3 className="text-xl font-bold text-gradient mb-4">Detalle por Etapa</h3>
+        <h3 className="text-xl font-bold text-gradient mb-4">Detalle por Tipo de Propiedad</h3>
         <div className="overflow-x-auto scrollbar-thin">
           <table className="w-full">
             <thead>
               <tr className="border-b border-dark-700">
-                <th className="text-left py-3 px-4 text-dark-400 font-medium">Etapa</th>
+                <th className="text-left py-3 px-4 text-dark-400 font-medium">Tipo de Propiedad</th>
                 <th className="text-right py-3 px-4 text-dark-400 font-medium">Cantidad</th>
                 <th className="text-right py-3 px-4 text-dark-400 font-medium">% del Total</th>
               </tr>
             </thead>
             <tbody>
-              {stageMetrics.map((stage, index) => {
-                const colors = STAGE_COLORS[stage.stage as PipelineStage]
+              {propertyMetrics.map((property, index) => {
+                const colors = PROPERTY_COLORS[property.propertyType] || DEFAULT_COLOR
                 return (
                   <tr
-                    key={stage.stage}
+                    key={property.propertyType}
                     className={`border-b ${colors.border} hover:${colors.bg} transition-colors ${
                       index % 2 === 0 ? 'bg-dark-900/20' : ''
                     }`}
@@ -174,14 +182,14 @@ export function DashboardView() {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${colors.accent}`} />
-                        <span className={`${colors.text} font-medium`}>{stage.stage}</span>
+                        <span className={`${colors.text} font-medium`}>{property.propertyType}</span>
                       </div>
                     </td>
                     <td className="text-right py-3 px-4">
-                      <span className={`${colors.text} font-semibold`}>{stage.count}</span>
+                      <span className={`${colors.text} font-semibold`}>{property.count}</span>
                     </td>
                     <td className="text-right py-3 px-4">
-                      <span className="text-dark-300">{stage.percentage.toFixed(1)}%</span>
+                      <span className="text-dark-300">{property.percentage.toFixed(1)}%</span>
                     </td>
                   </tr>
                 )
