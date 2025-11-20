@@ -30,7 +30,6 @@ export interface Property {
   es_apto_profesional: string | null;
   acepta_financiacion_permuta: string | null;
   modalidad_visitas: string | null;
-  reservada: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -66,7 +65,6 @@ export interface PropertyFormData {
   es_apto_profesional?: string | null;
   acepta_financiacion_permuta?: string | null;
   modalidad_visitas?: string | null;
-  reservada?: string | null;
 }
 
 export type PropertyFilters = {

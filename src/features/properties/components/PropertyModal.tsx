@@ -66,7 +66,6 @@ export function PropertyModal({
         es_apto_profesional: property.es_apto_profesional,
         acepta_financiacion_permuta: property.acepta_financiacion_permuta,
         modalidad_visitas: property.modalidad_visitas,
-        reservada: property.reservada,
       });
     } else {
       setFormData({
