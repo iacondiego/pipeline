@@ -103,6 +103,28 @@ export function usePipeline() {
     }
   }, [leads])
 
+  const updateLeadNotes = useCallback(async (phone: string, notes: string) => {
+    // Optimistic update: actualizar UI inmediatamente
+    const previousLeads = [...leads]
+
+    setLeads((prev) =>
+      prev.map((lead) =>
+        lead.phone === phone ? { ...lead, notes } : lead
+      )
+    )
+
+    try {
+      await leadService.updateNotes(phone, notes)
+      console.log('✅ Lead notes updated successfully:', phone)
+    } catch (err) {
+      // Revertir en caso de error
+      console.error('❌ Error updating notes, reverting...', err)
+      setLeads(previousLeads)
+      setError(err instanceof Error ? err.message : 'Error al actualizar notas')
+      throw err
+    }
+  }, [leads])
+
   const getStageColumns = useCallback((): StageColumn[] => {
     return PIPELINE_STAGES.map((stage) => {
       const stageLeads = leads.filter((lead) => lead.stage === stage)
@@ -129,6 +151,7 @@ export function usePipeline() {
     isLoading,
     error,
     updateLeadStage,
+    updateLeadNotes,
     getStageColumns,
     refresh: loadLeads,
   }

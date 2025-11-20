@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { PropertiesTable } from '@/features/properties/components/PropertiesTable';
 import { PropertyModal } from '@/features/properties/components/PropertyModal';
 import { useProperties } from '@/features/properties/hooks/useProperties';
 import { Property, PropertyFilters, PropertyFormData } from '@/features/properties/types';
 
 export default function PropertiesPage() {
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -65,25 +67,46 @@ export default function PropertiesPage() {
               Gestiona tu cartera de propiedades
             </p>
           </div>
-          <button
-            onClick={handleCreateClick}
-            className="px-6 py-3 bg-electric-500 text-white rounded-lg hover:bg-electric-600 transition-all duration-200 shadow-electric flex items-center gap-2"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex gap-3">
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="px-6 py-3 text-dark-100 border border-dark-700 rounded-lg hover:border-electric-500 hover:text-electric-500 transition-all duration-200 flex items-center gap-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            Nueva Propiedad
-          </button>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver
+            </button>
+            <button
+              onClick={handleCreateClick}
+              className="px-6 py-3 bg-electric-500 text-white rounded-lg hover:bg-electric-600 transition-all duration-200 shadow-electric flex items-center gap-2"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Nueva Propiedad
+            </button>
+          </div>
         </div>
 
         {/* Stats */}

@@ -35,30 +35,6 @@ export function Navigation() {
       {/* Navigation Links */}
       <nav className="flex-1 p-4 space-y-2">
         <Link
-          href="/pipeline"
-          className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
-            isActive('/pipeline')
-              ? 'bg-electric-500 text-white shadow-electric'
-              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
-          }`}
-        >
-          <svg
-            className="w-5 h-5 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
-            />
-          </svg>
-          <span className="font-medium">Pipeline</span>
-        </Link>
-
-        <Link
           href="/dashboard"
           className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
             isActive('/dashboard')
@@ -80,6 +56,30 @@ export function Navigation() {
             />
           </svg>
           <span className="font-medium">Dashboard</span>
+        </Link>
+
+        <Link
+          href="/pipeline"
+          className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
+            isActive('/pipeline')
+              ? 'bg-electric-500 text-white shadow-electric'
+              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
+          }`}
+        >
+          <svg
+            className="w-5 h-5 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+            />
+          </svg>
+          <span className="font-medium">Pipeline</span>
         </Link>
 
         <Link

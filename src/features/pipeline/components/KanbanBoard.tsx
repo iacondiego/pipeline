@@ -20,7 +20,7 @@ import { LeadCard } from './LeadCard'
 import { SearchBar } from './SearchBar'
 
 export function KanbanBoard() {
-  const { getStageColumns, updateLeadStage, isLoading, error } = usePipeline()
+  const { getStageColumns, updateLeadStage, updateLeadNotes, isLoading, error } = usePipeline()
   const [activeLead, setActiveLead] = useState<Lead | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -297,7 +297,7 @@ export function KanbanBoard() {
             <div className="px-6 pb-6 h-full">
               <div className="flex gap-6 h-full">
                 {columns.map((column) => (
-                  <KanbanColumn key={column.id} column={column} />
+                  <KanbanColumn key={column.id} column={column} onUpdateNotes={updateLeadNotes} />
                 ))}
               </div>
             </div>

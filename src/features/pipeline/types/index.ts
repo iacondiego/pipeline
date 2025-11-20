@@ -72,6 +72,7 @@ export const LeadSchema = z.object({
   interes_propiedad: z.string().min(1, 'El interés en propiedad es requerido'),
   stage: z.enum(PIPELINE_STAGES),
   contact_phone: z.string().optional().nullable(), // Referencia al contacto asociado
+  notes: z.string().optional().nullable(), // Notas del lead
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
 })

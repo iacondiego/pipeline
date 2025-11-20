@@ -1,12 +1,18 @@
-import { memo } from 'react'
+'use client'
+
+import { memo, useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 import { Lead, STAGE_COLORS } from '../types'
 
 interface LeadCardProps {
   lead: Lead
+  onUpdateNotes: (phone: string, notes: string) => void
 }
 
-function LeadCardComponent({ lead }: LeadCardProps) {
+function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
+  const [isEditingNotes, setIsEditingNotes] = useState(false)
+  const [notes, setNotes] = useState(lead.notes || '')
+
   const {
     attributes,
     listeners,
@@ -50,22 +56,34 @@ function LeadCardComponent({ lead }: LeadCardProps) {
     )
   }
 
+  const handleSaveNotes = () => {
+    onUpdateNotes(lead.phone, notes)
+    setIsEditingNotes(false)
+  }
+
+  const handleCancelNotes = () => {
+    setNotes(lead.notes || '')
+    setIsEditingNotes(false)
+  }
+
   return (
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className={`
         group relative p-3.5 rounded-lg
         card-glass border-2 ${colors.border}
-        cursor-grab active:cursor-grabbing
         transition-all duration-200 ease-out
         ${colors.hover} hover:scale-[1.02] hover:shadow-lg
         ${isDragging ? 'opacity-30 scale-90 shadow-2xl' : 'opacity-100'}
+        ${isEditingNotes ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'}
       `}
     >
-      <div className="space-y-3">
+      <div
+        {...(isEditingNotes ? {} : attributes)}
+        {...(isEditingNotes ? {} : listeners)}
+        className="space-y-3"
+      >
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <h3 className={`font-semibold text-dark-50 group-hover:${colors.text} transition-colors truncate`}>
@@ -88,6 +106,60 @@ function LeadCardComponent({ lead }: LeadCardProps) {
               {lead.interes_propiedad}
             </p>
           </div>
+        </div>
+
+        {/* Notas Section */}
+        <div className="space-y-1.5">
+          {isEditingNotes ? (
+            <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Agregar nota..."
+                className="w-full px-2 py-1.5 text-xs bg-dark-800 border border-dark-600 rounded text-dark-100 placeholder-dark-500 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none resize-none"
+                rows={3}
+                autoFocus
+              />
+              <div className="flex gap-1.5">
+                <button
+                  onClick={handleSaveNotes}
+                  className="flex-1 px-2 py-1 text-xs bg-electric-500 text-white rounded hover:bg-electric-600 transition-colors"
+                >
+                  Guardar
+                </button>
+                <button
+                  onClick={handleCancelNotes}
+                  className="flex-1 px-2 py-1 text-xs bg-dark-700 text-dark-300 rounded hover:bg-dark-600 transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsEditingNotes(true)
+              }}
+              className="w-full text-left px-2 py-1.5 text-xs bg-dark-800/50 border border-dark-700/50 rounded text-dark-400 hover:text-dark-200 hover:border-dark-600 transition-colors"
+            >
+              {notes ? (
+                <div className="flex items-start gap-1.5">
+                  <svg className="w-3 h-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span className="flex-1 line-clamp-2">{notes}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Agregar nota</span>
+                </div>
+              )}
+            </button>
+          )}
         </div>
 
         <div className="h-1.5 w-full bg-dark-700/60 rounded-full overflow-hidden border border-dark-600/30">

@@ -33,6 +33,22 @@ export const leadService = {
     return data
   },
 
+  async updateNotes(phone: string, notes: string): Promise<Lead> {
+    const { data, error } = await supabase
+      .from('leads')
+      .update({ notes })
+      .eq('phone', phone)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error updating lead notes:', error)
+      throw error
+    }
+
+    return data
+  },
+
   async create(lead: Omit<Lead, 'created_at' | 'updated_at'>): Promise<Lead> {
     // 1. Crear o actualizar el contacto primero
     try {

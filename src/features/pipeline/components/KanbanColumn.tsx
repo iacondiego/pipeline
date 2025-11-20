@@ -4,9 +4,10 @@ import { LeadCard } from './LeadCard'
 
 interface KanbanColumnProps {
   column: StageColumn
+  onUpdateNotes: (phone: string, notes: string) => void
 }
 
-export function KanbanColumn({ column }: KanbanColumnProps) {
+export function KanbanColumn({ column, onUpdateNotes }: KanbanColumnProps) {
   const { setNodeRef, isOver } = useDroppable({
     id: column.id,
     data: {
@@ -96,7 +97,7 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
             </div>
           </div>
         ) : (
-          column.leads.map((lead) => <LeadCard key={lead.phone} lead={lead} />)
+          column.leads.map((lead) => <LeadCard key={lead.phone} lead={lead} onUpdateNotes={onUpdateNotes} />)
         )}
       </div>
     </div>
