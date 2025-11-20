@@ -258,7 +258,7 @@ export const contactService = {
   /**
    * Suscribirse a cambios en la tabla contacts
    */
-  subscribe(callback: (payload: any) => void) {
+  subscribe(callback: (payload: unknown) => void) {
     return supabase
       .channel('contacts-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'contacts' }, callback)

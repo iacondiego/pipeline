@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useCallback } from 'react'
 import { Navigation } from '@/shared/components/Navigation'
 import { useContacts } from '@/features/contacts/hooks/useContacts'
 import { ContactsTable } from '@/features/contacts/components/ContactsTable'
@@ -9,11 +9,9 @@ import { ContactWithStats } from '@/features/contacts/types'
 
 export default function ContactsPage() {
   const { contacts, isLoading, error, searchContacts, loadContacts } = useContacts()
-  const [searchQuery, setSearchQuery] = useState('')
 
   const handleSearch = useCallback(
     async (query: string) => {
-      setSearchQuery(query)
       if (query.trim()) {
         await searchContacts({ search: query })
       } else {
