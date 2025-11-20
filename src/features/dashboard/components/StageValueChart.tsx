@@ -1,17 +1,28 @@
 'use client'
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from 'recharts'
 import { StageMetric } from '../types'
+import { PipelineStage } from '@/features/pipeline/types'
 
 interface StageValueChartProps {
   data: StageMetric[]
 }
 
+// Colores que coinciden con STAGE_COLORS del pipeline
+const STAGE_CHART_COLORS: Record<PipelineStage, string> = {
+  'Prospecto': '#a855f7',        // purple-500
+  'Contactado': '#3b82f6',       // blue-500
+  'Interesado': '#f59e0b',       // amber-500
+  'Propuesta enviada': '#10b981', // emerald-500
+}
+
 export function StageValueChart({ data }: StageValueChartProps) {
   const chartData = data.map((item) => ({
     stage: item.stage.length > 15 ? item.stage.substring(0, 12) + '...' : item.stage,
+    fullStage: item.stage,
     'Valor Total': item.value,
     'Cantidad': item.count,
+    color: STAGE_CHART_COLORS[item.stage as PipelineStage] || '#00a0ff'
   }))
 
   const formatCurrency = (value: number) => {
@@ -57,7 +68,11 @@ export function StageValueChart({ data }: StageValueChartProps) {
             }}
           />
           <Legend wrapperStyle={{ color: '#a3a3b0' }} />
-          <Bar dataKey="Valor Total" fill="#00a0ff" radius={[8, 8, 0, 0]} />
+          <Bar dataKey="Valor Total" radius={[8, 8, 0, 0]}>
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

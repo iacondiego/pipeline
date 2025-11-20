@@ -4,6 +4,7 @@ import { useDashboardMetrics } from '../hooks/useDashboardMetrics'
 import { MetricCard } from './MetricCard'
 import { StageDistributionChart } from './StageDistributionChart'
 import { StageValueChart } from './StageValueChart'
+import { PipelineStage, STAGE_COLORS } from '@/features/pipeline/types'
 
 export function DashboardView() {
   const { metrics, stageMetrics, isLoading, error } = useDashboardMetrics()
@@ -67,9 +68,10 @@ export function DashboardView() {
           title="Total de Leads"
           value={metrics.totalLeads}
           subtitle="Todos los leads en el pipeline"
+          color="purple"
           icon={
             <svg
-              className="w-6 h-6 text-electric-400"
+              className="w-6 h-6 text-purple-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -88,9 +90,10 @@ export function DashboardView() {
           title="Valor Total del Pipeline"
           value={formatCurrency(metrics.totalValue)}
           subtitle="Suma de todos los leads"
+          color="blue"
           icon={
             <svg
-              className="w-6 h-6 text-electric-400"
+              className="w-6 h-6 text-blue-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -109,9 +112,10 @@ export function DashboardView() {
           title="Leads Últimos 7 Días"
           value={metrics.leadsLast7Days}
           subtitle="Nuevos leads esta semana"
+          color="amber"
           icon={
             <svg
-              className="w-6 h-6 text-electric-400"
+              className="w-6 h-6 text-amber-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -130,9 +134,10 @@ export function DashboardView() {
           title="Tasa de Conversión"
           value={`${metrics.conversionRate.toFixed(1)}%`}
           subtitle="Leads en propuesta enviada"
+          color="emerald"
           icon={
             <svg
-              className="w-6 h-6 text-electric-400"
+              className="w-6 h-6 text-emerald-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -166,23 +171,33 @@ export function DashboardView() {
               </tr>
             </thead>
             <tbody>
-              {stageMetrics.map((stage, index) => (
-                <tr
-                  key={stage.stage}
-                  className={`border-b border-dark-800 hover:bg-dark-800/30 transition-colors ${
-                    index % 2 === 0 ? 'bg-dark-900/20' : ''
-                  }`}
-                >
-                  <td className="py-3 px-4 text-dark-100">{stage.stage}</td>
-                  <td className="text-right py-3 px-4 text-dark-100">{stage.count}</td>
-                  <td className="text-right py-3 px-4 text-electric-400 font-semibold">
-                    {formatCurrency(stage.value)}
-                  </td>
-                  <td className="text-right py-3 px-4 text-dark-300">
-                    {stage.percentage.toFixed(1)}%
-                  </td>
-                </tr>
-              ))}
+              {stageMetrics.map((stage, index) => {
+                const colors = STAGE_COLORS[stage.stage as PipelineStage]
+                return (
+                  <tr
+                    key={stage.stage}
+                    className={`border-b ${colors.border} hover:${colors.bg} transition-colors ${
+                      index % 2 === 0 ? 'bg-dark-900/20' : ''
+                    }`}
+                  >
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-3 h-3 rounded-full ${colors.accent}`} />
+                        <span className={`${colors.text} font-medium`}>{stage.stage}</span>
+                      </div>
+                    </td>
+                    <td className="text-right py-3 px-4">
+                      <span className={`${colors.text} font-semibold`}>{stage.count}</span>
+                    </td>
+                    <td className="text-right py-3 px-4">
+                      <span className={`${colors.text} font-bold`}>{formatCurrency(stage.value)}</span>
+                    </td>
+                    <td className="text-right py-3 px-4">
+                      <span className="text-dark-300">{stage.percentage.toFixed(1)}%</span>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

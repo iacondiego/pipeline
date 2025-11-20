@@ -2,17 +2,25 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts'
 import { StageMetric } from '../types'
+import { PipelineStage } from '@/features/pipeline/types'
 
 interface StageDistributionChartProps {
   data: StageMetric[]
 }
 
-const COLORS = ['#00a0ff', '#0088cc', '#006699', '#004466']
+// Colores que coinciden con STAGE_COLORS del pipeline
+const STAGE_CHART_COLORS: Record<PipelineStage, string> = {
+  'Prospecto': '#a855f7',        // purple-500
+  'Contactado': '#3b82f6',       // blue-500
+  'Interesado': '#f59e0b',       // amber-500
+  'Propuesta enviada': '#10b981', // emerald-500
+}
 
 export function StageDistributionChart({ data }: StageDistributionChartProps) {
   const chartData = data.map((item) => ({
     name: item.stage,
     value: item.count,
+    color: STAGE_CHART_COLORS[item.stage as PipelineStage] || '#00a0ff'
   }))
 
   return (
@@ -31,7 +39,7 @@ export function StageDistributionChart({ data }: StageDistributionChartProps) {
             dataKey="value"
           >
             {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
           <Tooltip
