@@ -28,7 +28,7 @@ export function Navigation() {
               />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-gradient">Pipeline Vibe</h1>
+          <h1 className="text-xl font-bold text-gradient">Setterless</h1>
         </div>
       </div>
 

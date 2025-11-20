@@ -1,4 +1,4 @@
-# 🚀 Pipeline Vibe
+# 🚀 Setterless
 
 **Sistema de gestión de pipeline de ventas con tablero Kanban, dashboard de métricas y sincronización en tiempo real.**
 
@@ -294,4 +294,4 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 **Hecho con ❤️ usando Next.js 16 + Claude Code**
 
-[⬆ Volver arriba](#-pipeline-vibe)
+[⬆ Volver arriba](#-setterless)

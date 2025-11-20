@@ -1,5 +1,5 @@
 import { useDroppable } from '@dnd-kit/core'
-import { StageColumn } from '../types'
+import { StageColumn, STAGE_COLORS } from '../types'
 import { LeadCard } from './LeadCard'
 
 interface KanbanColumnProps {
@@ -15,6 +15,8 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
     }
   })
 
+  const colors = STAGE_COLORS[column.id]
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('es-CL', {
       style: 'currency',
@@ -29,16 +31,16 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
       className={`
         flex flex-col h-full min-w-[360px] max-w-[420px] flex-shrink-0
         transition-all duration-200
-        ${isOver ? 'ring-2 ring-electric-500' : ''}
+        ${isOver ? `ring-2 ${colors.border.replace('border-', 'ring-')}` : ''}
       `}
     >
-      {/* Header con mejor contraste */}
-      <div className="card-glass rounded-t-xl p-4 border-b-2 border-electric-500/50 bg-gradient-to-r from-dark-800/80 via-dark-800/60 to-dark-900/40">
+      {/* Header con colores por etapa */}
+      <div className={`card-glass rounded-t-xl p-4 border-b-2 ${colors.border} ${colors.bg}`}>
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-electric-300">{column.title}</h2>
-            <div className="flex items-center gap-2 px-3 py-1 bg-electric-500/30 rounded-full border border-electric-500/50">
-              <span className="text-sm font-bold text-electric-200">
+            <h2 className={`text-lg font-bold ${colors.text}`}>{column.title}</h2>
+            <div className={`flex items-center gap-2 px-3 py-1 ${colors.bg} rounded-full border ${colors.border}`}>
+              <span className={`text-sm font-bold ${colors.text}`}>
                 {column.count}
               </span>
             </div>
@@ -46,19 +48,19 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
 
           <div className="flex items-baseline gap-2">
             <span className="text-sm text-dark-300">Total:</span>
-            <span className="text-xl font-bold text-electric-300">
+            <span className={`text-xl font-bold ${colors.text}`}>
               {formatCurrency(column.totalValue)}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Contenedor de leads con mejor contraste */}
+      {/* Contenedor de leads con colores por etapa */}
       <div
         className={`
           flex-1 card-glass rounded-b-xl p-4 overflow-y-auto scrollbar-thin space-y-3 min-h-[500px]
           transition-all duration-200
-          ${isOver ? 'bg-dark-700/50 border-b-2 border-electric-500' : 'border-b-2 border-dark-700/50'}
+          ${isOver ? `${colors.bg} border-b-2 ${colors.border}` : 'border-b-2 border-dark-700/50'}
         `}
       >
         {column.leads.length === 0 ? (

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Pipeline Vibe - Gestión de Leads en Tiempo Real',
+  title: 'Setterless - Gestión de Leads en Tiempo Real',
   description: 'Sistema de gestión de pipeline de ventas con tablero Kanban y dashboard de métricas en tiempo real',
 }
 
