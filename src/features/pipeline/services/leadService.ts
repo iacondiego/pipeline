@@ -1,5 +1,6 @@
 import { supabase } from '@/shared/lib/supabase'
 import { Lead, PipelineStage } from '../types'
+import { contactService } from '@/features/contacts/services/contactService'
 
 export const leadService = {
   async getAll(): Promise<Lead[]> {
@@ -33,9 +34,28 @@ export const leadService = {
   },
 
   async create(lead: Omit<Lead, 'created_at' | 'updated_at'>): Promise<Lead> {
+    // 1. Crear o actualizar el contacto primero
+    try {
+      await contactService.upsert({
+        phone: lead.phone,
+        nombres: lead.nombres,
+        // Si hay más campos en el lead que deban ir al contacto, agregarlos aquí
+      })
+      console.log('✅ Contacto creado/actualizado:', lead.phone)
+    } catch (contactError) {
+      console.error('⚠️ Error creating contact (will continue with lead):', contactError)
+      // Continuar aunque falle la creación del contacto
+    }
+
+    // 2. Crear el lead con referencia al contacto
+    const leadWithContact = {
+      ...lead,
+      contact_phone: lead.phone, // Vincular el lead con el contacto
+    }
+
     const { data, error } = await supabase
       .from('leads')
-      .insert([lead])
+      .insert([leadWithContact])
       .select()
       .single()
 
