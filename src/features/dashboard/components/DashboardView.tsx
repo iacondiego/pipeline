@@ -9,14 +9,6 @@ import { PipelineStage, STAGE_COLORS } from '@/features/pipeline/types'
 export function DashboardView() {
   const { metrics, stageMetrics, isLoading, error } = useDashboardMetrics()
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP',
-      minimumFractionDigits: 0,
-    }).format(value)
-  }
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -87,28 +79,6 @@ export function DashboardView() {
         />
 
         <MetricCard
-          title="Valor Total del Pipeline"
-          value={formatCurrency(metrics.totalValue)}
-          subtitle="Suma de todos los leads"
-          color="blue"
-          icon={
-            <svg
-              className="w-6 h-6 text-blue-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          }
-        />
-
-        <MetricCard
           title="Leads Últimos 7 Días"
           value={metrics.leadsLast7Days}
           subtitle="Nuevos leads esta semana"
@@ -131,9 +101,31 @@ export function DashboardView() {
         />
 
         <MetricCard
+          title="Leads Últimos 30 Días"
+          value={metrics.leadsLast30Days}
+          subtitle="Nuevos leads este mes"
+          color="blue"
+          icon={
+            <svg
+              className="w-6 h-6 text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          }
+        />
+
+        <MetricCard
           title="Tasa de Conversión"
           value={`${metrics.conversionRate.toFixed(1)}%`}
-          subtitle="Leads en propuesta enviada"
+          subtitle="Leads en venta ganada"
           color="emerald"
           icon={
             <svg
@@ -166,7 +158,6 @@ export function DashboardView() {
               <tr className="border-b border-dark-700">
                 <th className="text-left py-3 px-4 text-dark-400 font-medium">Etapa</th>
                 <th className="text-right py-3 px-4 text-dark-400 font-medium">Cantidad</th>
-                <th className="text-right py-3 px-4 text-dark-400 font-medium">Valor Total</th>
                 <th className="text-right py-3 px-4 text-dark-400 font-medium">% del Total</th>
               </tr>
             </thead>
@@ -188,9 +179,6 @@ export function DashboardView() {
                     </td>
                     <td className="text-right py-3 px-4">
                       <span className={`${colors.text} font-semibold`}>{stage.count}</span>
-                    </td>
-                    <td className="text-right py-3 px-4">
-                      <span className={`${colors.text} font-bold`}>{formatCurrency(stage.value)}</span>
                     </td>
                     <td className="text-right py-3 px-4">
                       <span className="text-dark-300">{stage.percentage.toFixed(1)}%</span>

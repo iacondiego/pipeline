@@ -8,12 +8,15 @@ interface StageDistributionChartProps {
   data: StageMetric[]
 }
 
-// Colores que coinciden con STAGE_COLORS del pipeline
+// Colores que coinciden con STAGE_COLORS del pipeline inmobiliario
 const STAGE_CHART_COLORS: Record<PipelineStage, string> = {
-  'Prospecto': '#a855f7',        // purple-500
-  'Contactado': '#3b82f6',       // blue-500
-  'Interesado': '#f59e0b',       // amber-500
-  'Propuesta enviada': '#10b981', // emerald-500
+  'En atención por IA': '#3b82f6',    // blue-500
+  'En atención humana': '#06b6d4',    // cyan-500
+  'Interesado en visitar': '#f59e0b', // amber-500
+  'No asiste a cita': '#ef4444',      // red-500
+  'Esperando respuesta': '#a855f7',   // purple-500
+  'Venta ganada': '#10b981',          // emerald-500
+  'Nutrición': '#64748b',             // slate-500
 }
 
 export function StageDistributionChart({ data }: StageDistributionChartProps) {

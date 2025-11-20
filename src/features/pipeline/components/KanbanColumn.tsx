@@ -17,13 +17,9 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
 
   const colors = STAGE_COLORS[column.id]
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP',
-      minimumFractionDigits: 0,
-    }).format(value)
-  }
+  // Obtener el tipo de propiedad más común
+  const topProperty = Object.entries(column.propertyTypes)
+    .sort((a, b) => b[1] - a[1])[0]
 
   return (
     <div
@@ -46,12 +42,27 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
             </div>
           </div>
 
-          <div className="flex items-baseline gap-2">
-            <span className="text-sm text-dark-300">Total:</span>
-            <span className={`text-xl font-bold ${colors.text}`}>
-              {formatCurrency(column.totalValue)}
-            </span>
-          </div>
+          {topProperty && (
+            <div className="flex items-center gap-2">
+              <svg
+                className={`w-4 h-4 ${colors.text}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+              <span className="text-sm text-dark-300">Más buscado:</span>
+              <span className={`text-sm font-semibold ${colors.text}`}>
+                {topProperty[0]} ({topProperty[1]})
+              </span>
+            </div>
+          )}
         </div>
       </div>
 

@@ -20,14 +20,12 @@ export function useDashboardMetrics() {
     ).length
 
     const totalLeads = leads.length
-    const totalValue = leads.reduce((sum, lead) => sum + lead.estimated_value, 0)
 
-    const closedLeads = leads.filter((lead) => lead.stage === 'Propuesta enviada').length
+    const closedLeads = leads.filter((lead) => lead.stage === 'Venta ganada').length
     const conversionRate = totalLeads > 0 ? (closedLeads / totalLeads) * 100 : 0
 
     return {
       totalLeads,
-      totalValue,
       leadsLast7Days,
       leadsLast30Days,
       conversionRate,
@@ -40,13 +38,11 @@ export function useDashboardMetrics() {
     return PIPELINE_STAGES.map((stage) => {
       const stageLeads = leads.filter((lead) => lead.stage === stage)
       const count = stageLeads.length
-      const value = stageLeads.reduce((sum, lead) => sum + lead.estimated_value, 0)
       const percentage = totalLeads > 0 ? (count / totalLeads) * 100 : 0
 
       return {
         stage,
         count,
-        value,
         percentage,
       }
     })

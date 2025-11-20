@@ -106,20 +106,22 @@ export function usePipeline() {
   const getStageColumns = useCallback((): StageColumn[] => {
     return PIPELINE_STAGES.map((stage) => {
       const stageLeads = leads.filter((lead) => lead.stage === stage)
-      const totalValue = stageLeads.reduce((sum, lead) => sum + lead.estimated_value, 0)
+
+      // Contar tipos de propiedad en esta etapa
+      const propertyTypes: Record<string, number> = {}
+      stageLeads.forEach((lead) => {
+        const property = lead.interes_propiedad
+        propertyTypes[property] = (propertyTypes[property] || 0) + 1
+      })
 
       return {
         id: stage,
         title: stage,
         leads: stageLeads,
-        totalValue,
         count: stageLeads.length,
+        propertyTypes,
       }
     })
-  }, [leads])
-
-  const getTotalValue = useCallback(() => {
-    return leads.reduce((sum, lead) => sum + lead.estimated_value, 0)
   }, [leads])
 
   return {
@@ -128,7 +130,6 @@ export function usePipeline() {
     error,
     updateLeadStage,
     getStageColumns,
-    getTotalValue,
     refresh: loadLeads,
   }
 }
