@@ -176,8 +176,8 @@ export function KanbanBoard() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center space-y-4 p-8 card-glass rounded-xl max-w-md">
+      <div className="flex items-center justify-center h-screen bg-dark-900 p-6">
+        <div className="text-center space-y-6 p-8 card-glass rounded-xl max-w-2xl">
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto">
             <svg
               className="w-8 h-8 text-red-500"
@@ -194,8 +194,42 @@ export function KanbanBoard() {
             </svg>
           </div>
           <div>
-            <h3 className="text-xl font-bold text-red-400 mb-2">Error</h3>
-            <p className="text-dark-400">{error}</p>
+            <h3 className="text-xl font-bold text-red-400 mb-2">Error al cargar leads</h3>
+            <p className="text-dark-400 mb-4">{error}</p>
+          </div>
+
+          <div className="text-left bg-dark-800/50 p-4 rounded-lg space-y-3">
+            <p className="text-sm text-dark-300 font-semibold">Posibles soluciones:</p>
+            <ul className="text-sm text-dark-400 space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-electric-500 mt-1">1.</span>
+                <span>
+                  <strong className="text-dark-300">Variables de entorno:</strong> Verifica que
+                  <code className="mx-1 px-2 py-0.5 bg-dark-700 rounded text-electric-400">NEXT_PUBLIC_SUPABASE_URL</code>
+                  y
+                  <code className="mx-1 px-2 py-0.5 bg-dark-700 rounded text-electric-400">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
+                  estén configuradas en Vercel
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-electric-500 mt-1">2.</span>
+                <span>
+                  <strong className="text-dark-300">RLS en Supabase:</strong> Ve a Database → Table Editor → leads →
+                  Verifica que exista una policy que permita SELECT
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-electric-500 mt-1">3.</span>
+                <span>
+                  <strong className="text-dark-300">Tabla leads:</strong> Verifica que la tabla exists en Supabase
+                  y tiene datos de prueba
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="text-xs text-dark-500 pt-2">
+            Abre la consola del navegador (F12) para más detalles
           </div>
         </div>
       </div>
