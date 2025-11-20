@@ -6,14 +6,13 @@ export function usePipeline() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const leadsRef = useRef<Lead[]>([])
+  const subscriptionRef = useRef<ReturnType<typeof leadService.subscribeToChanges> | null>(null)
 
   const loadLeads = useCallback(async () => {
     try {
       setIsLoading(true)
       const data = await leadService.getAll()
       setLeads(data)
-      leadsRef.current = data
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al cargar leads')
@@ -22,9 +21,13 @@ export function usePipeline() {
     }
   }, [])
 
+  // Load initial data
   useEffect(() => {
     loadLeads()
+  }, [loadLeads])
 
+  // Setup real-time subscription (separate effect, runs only once)
+  useEffect(() => {
     console.log('🔌 Setting up real-time subscription...')
 
     const subscription = leadService.subscribeToChanges((payload) => {
@@ -48,7 +51,6 @@ export function usePipeline() {
           console.log('✅ Added new lead, total:', newLeads.length)
           return newLeads
         })
-        leadsRef.current = [payload.new as Lead, ...leadsRef.current]
       } else if (payload.eventType === 'UPDATE') {
         console.log('🔄 UPDATE event:', payload.new)
         setLeads((prev) => {
@@ -58,9 +60,6 @@ export function usePipeline() {
           console.log('✅ Updated lead:', payload.new.phone)
           return updatedLeads
         })
-        leadsRef.current = leadsRef.current.map((lead) =>
-          lead.phone === payload.new.phone ? (payload.new as Lead) : lead
-        )
       } else if (payload.eventType === 'DELETE' && payload?.old?.phone) {
         console.log('🗑️ DELETE event:', payload.old)
         setLeads((prev) => {
@@ -68,24 +67,41 @@ export function usePipeline() {
           console.log('✅ Deleted lead, remaining:', filteredLeads.length)
           return filteredLeads
         })
-        leadsRef.current = leadsRef.current.filter((lead) => lead.phone !== payload.old.phone)
       }
     })
 
+    subscriptionRef.current = subscription
+
     return () => {
       console.log('🔌 Unsubscribing from real-time...')
-      subscription.unsubscribe()
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe()
+        subscriptionRef.current = null
+      }
     }
-  }, [loadLeads])
+  }, []) // Empty dependency array - run once on mount
 
   const updateLeadStage = useCallback(async (phone: string, stage: PipelineStage) => {
+    // Optimistic update: actualizar UI inmediatamente
+    const previousLeads = [...leads]
+
+    setLeads((prev) =>
+      prev.map((lead) =>
+        lead.phone === phone ? { ...lead, stage } : lead
+      )
+    )
+
     try {
       await leadService.updateStage(phone, stage)
+      console.log('✅ Lead stage updated successfully:', phone, '→', stage)
     } catch (err) {
+      // Revertir en caso de error
+      console.error('❌ Error updating lead, reverting...', err)
+      setLeads(previousLeads)
       setError(err instanceof Error ? err.message : 'Error al actualizar lead')
       throw err
     }
-  }, [])
+  }, [leads])
 
   const getStageColumns = useCallback((): StageColumn[] => {
     return PIPELINE_STAGES.map((stage) => {
