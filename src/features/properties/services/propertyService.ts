@@ -98,17 +98,23 @@ export const propertyService = {
     }
   },
 
-  subscribeToChanges(callback: (payload: any) => void) {
+  subscribeToChanges(callback: (payload: {
+    eventType: 'INSERT' | 'UPDATE' | 'DELETE';
+    new: Property;
+    old: Property;
+  }) => void) {
     const subscription = supabase
       .channel('properties-changes')
       .on(
-        'postgres_changes',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        'postgres_changes' as any,
         {
           event: '*',
           schema: 'public',
           table: 'properties',
         },
-        callback
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        callback as any
       )
       .subscribe();
 

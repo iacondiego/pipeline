@@ -1,11 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { propertyService } from '../services/propertyService';
-import { Property, PropertyFilters } from '../types';
+import { Property, PropertyFilters, PropertyFormData } from '../types';
 
 export function useProperties(filters?: PropertyFilters) {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const filtersString = useMemo(() => JSON.stringify(filters), [filters]);
+
+  const loadProperties = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await propertyService.getAll(filters);
+      setProperties(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load properties');
+      console.error('Error loading properties:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [filters]);
 
   useEffect(() => {
     loadProperties();
@@ -29,23 +45,9 @@ export function useProperties(filters?: PropertyFilters) {
     return () => {
       subscription.unsubscribe();
     };
-  }, [JSON.stringify(filters)]);
+  }, [filtersString, loadProperties]);
 
-  const loadProperties = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await propertyService.getAll(filters);
-      setProperties(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load properties');
-      console.error('Error loading properties:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const createProperty = async (property: any) => {
+  const createProperty = async (property: PropertyFormData) => {
     try {
       const newProperty = await propertyService.create(property);
       return newProperty;
@@ -55,7 +57,7 @@ export function useProperties(filters?: PropertyFilters) {
     }
   };
 
-  const updateProperty = async (id: string, property: any) => {
+  const updateProperty = async (id: string, property: Partial<PropertyFormData>) => {
     try {
       const updatedProperty = await propertyService.update(id, property);
       return updatedProperty;

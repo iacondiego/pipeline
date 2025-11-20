@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { PropertiesTable } from '@/features/properties/components/PropertiesTable';
 import { PropertyModal } from '@/features/properties/components/PropertyModal';
 import { useProperties } from '@/features/properties/hooks/useProperties';
-import { Property, PropertyFilters } from '@/features/properties/types';
+import { Property, PropertyFilters, PropertyFormData } from '@/features/properties/types';
 
 export default function PropertiesPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function PropertiesPage() {
     setModalOpen(true);
   };
 
-  const handleSave = async (data: any) => {
+  const handleSave = async (data: PropertyFormData) => {
     if (modalMode === 'create') {
       await createProperty(data);
     } else if (selectedProperty) {
