@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { contactService } from '../services/contactService'
 import {
   Contact,
@@ -15,41 +15,84 @@ export function useContacts() {
   const [contacts, setContacts] = useState<ContactWithStats[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const isInitialMount = useRef(true)
+  const isLoadingRef = useRef(false)
 
-  // Cargar contactos (sin useCallback para evitar dependencia circular)
-  const loadContacts = async () => {
-    try {
-      setIsLoading(true)
-      setError(null)
-      const data = await contactService.getAllWithStats()
-      setContacts(data)
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Error desconocido'
-      setError(errorMessage)
-      console.error('Error loading contacts:', err)
-    } finally {
-      setIsLoading(false)
+  // Cargar contactos - función estable con useRef para evitar loops
+  useEffect(() => {
+    const loadContacts = async () => {
+      // Evitar múltiples cargas simultáneas
+      if (isLoadingRef.current) {
+        console.log('⏸️ Ya hay una carga en progreso, saltando...')
+        return
+      }
+
+      try {
+        isLoadingRef.current = true
+        setIsLoading(true)
+        setError(null)
+        console.log('📥 Cargando contactos...')
+        const data = await contactService.getAllWithStats()
+        setContacts(data)
+        console.log('✅ Contactos cargados:', data.length)
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Error desconocido'
+        setError(errorMessage)
+        console.error('❌ Error loading contacts:', err)
+      } finally {
+        setIsLoading(false)
+        isLoadingRef.current = false
+      }
     }
-  }
 
-  // Cargar contactos al montar el componente
-  useEffect(() => {
-    loadContacts()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Solo cargar una vez al montar
-
-  // Suscribirse a cambios en tiempo real
-  useEffect(() => {
-    const channel = contactService.subscribe(() => {
-      // Recargar contactos cuando hay cambios
+    // Solo cargar en el mount inicial
+    if (isInitialMount.current) {
+      isInitialMount.current = false
       loadContacts()
+    }
+  }, [])
+
+  // Suscripción real-time - SIN recargar automáticamente para evitar loops
+  useEffect(() => {
+    console.log('🔌 Configurando suscripción real-time...')
+
+    const channel = contactService.subscribe((payload) => {
+      console.log('📨 Cambio detectado en contacts:', payload)
+      // NO llamar loadContacts aquí para evitar loop
+      // El usuario puede refrescar manualmente o implementar optimistic updates
     })
 
     return () => {
+      console.log('🔌 Desconectando suscripción real-time...')
       channel.unsubscribe()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Solo suscribir una vez al montar
+  }, [])
+
+  // Función manual para recargar contactos
+  const loadContacts = async () => {
+    // Evitar múltiples cargas simultáneas
+    if (isLoadingRef.current) {
+      console.log('⏸️ Ya hay una carga en progreso, saltando...')
+      return
+    }
+
+    try {
+      isLoadingRef.current = true
+      setIsLoading(true)
+      setError(null)
+      console.log('📥 Recargando contactos manualmente...')
+      const data = await contactService.getAllWithStats()
+      setContacts(data)
+      console.log('✅ Contactos recargados:', data.length)
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido'
+      setError(errorMessage)
+      console.error('❌ Error loading contacts:', err)
+    } finally {
+      setIsLoading(false)
+      isLoadingRef.current = false
+    }
+  }
 
   // Crear un contacto
   const createContact = async (input: CreateContactInput): Promise<Contact> => {
