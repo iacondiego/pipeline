@@ -86,10 +86,10 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
       >
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <h3 className={`font-semibold text-dark-50 group-hover:${colors.text} transition-colors truncate`}>
+            <h3 className={`font-semibold text-gray-900 dark:text-dark-50 group-hover:${colors.text} transition-colors truncate`}>
               {lead.nombres}
             </h3>
-            <p className="text-xs text-dark-400 truncate font-mono">
+            <p className="text-xs text-gray-500 dark:text-dark-400 truncate font-mono">
               {lead.phone}
             </p>
           </div>
@@ -101,7 +101,7 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
             {getPropertyIcon()}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-dark-400">Interés en:</p>
+            <p className="text-xs text-gray-500 dark:text-dark-400">Interés en:</p>
             <p className={`font-semibold ${colors.text} text-sm truncate`}>
               {lead.interes_propiedad}
             </p>
@@ -116,7 +116,7 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Agregar nota..."
-                className="w-full px-2 py-1.5 text-xs bg-dark-800 border border-dark-600 rounded text-dark-100 placeholder-dark-500 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none resize-none"
+                className="w-full px-2 py-1.5 text-xs bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-600 rounded text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-500 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none resize-none"
                 rows={3}
                 autoFocus
               />
@@ -129,7 +129,7 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
                 </button>
                 <button
                   onClick={handleCancelNotes}
-                  className="flex-1 px-2 py-1 text-xs bg-dark-700 text-dark-300 rounded hover:bg-dark-600 transition-colors"
+                  className="flex-1 px-2 py-1 text-xs bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-dark-300 rounded hover:bg-gray-300 dark:hover:bg-dark-600 transition-colors"
                 >
                   Cancelar
                 </button>
@@ -141,7 +141,7 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
                 e.stopPropagation()
                 setIsEditingNotes(true)
               }}
-              className="w-full text-left px-2 py-1.5 text-xs bg-dark-800/50 border border-dark-700/50 rounded text-dark-400 hover:text-dark-200 hover:border-dark-600 transition-colors"
+              className="w-full text-left px-2 py-1.5 text-xs bg-gray-50 dark:bg-dark-800/50 border border-gray-200 dark:border-dark-700/50 rounded text-gray-500 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-200 hover:border-gray-300 dark:hover:border-dark-600 transition-colors"
             >
               {notes ? (
                 <div className="flex items-start gap-1.5">
@@ -162,7 +162,7 @@ function LeadCardComponent({ lead, onUpdateNotes }: LeadCardProps) {
           )}
         </div>
 
-        <div className="h-1.5 w-full bg-dark-700/60 rounded-full overflow-hidden border border-dark-600/30">
+        <div className="h-1.5 w-full bg-gray-200 dark:bg-dark-700/60 rounded-full overflow-hidden border border-gray-300 dark:border-dark-600/30">
           <div className={`h-full ${colors.accent} rounded-full animate-pulse-slow`} />
         </div>
       </div>

@@ -207,7 +207,7 @@ export function KanbanBoard() {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center space-y-4">
           <div className="w-16 h-16 border-4 border-electric-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-dark-400">Cargando pipeline...</p>
+          <p className="text-gray-500 dark:text-dark-400">Cargando pipeline...</p>
         </div>
       </div>
     )
@@ -215,7 +215,7 @@ export function KanbanBoard() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen bg-dark-900 p-6">
+      <div className="flex items-center justify-center h-screen p-6">
         <div className="text-center space-y-6 p-8 card-glass rounded-xl max-w-2xl">
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto">
             <svg
@@ -234,40 +234,40 @@ export function KanbanBoard() {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">Error al cargar leads</h3>
-            <p className="text-dark-400 mb-4">{error}</p>
+            <p className="text-gray-500 dark:text-dark-400 mb-4">{error}</p>
           </div>
 
-          <div className="text-left bg-dark-800/50 p-4 rounded-lg space-y-3">
-            <p className="text-sm text-dark-300 font-semibold">Posibles soluciones:</p>
-            <ul className="text-sm text-dark-400 space-y-2">
+          <div className="text-left bg-gray-100 dark:bg-dark-800/50 p-4 rounded-lg space-y-3">
+            <p className="text-sm text-gray-700 dark:text-dark-300 font-semibold">Posibles soluciones:</p>
+            <ul className="text-sm text-gray-600 dark:text-dark-400 space-y-2">
               <li className="flex items-start gap-2">
                 <span className="text-electric-500 mt-1">1.</span>
                 <span>
-                  <strong className="text-dark-300">Variables de entorno:</strong> Verifica que
-                  <code className="mx-1 px-2 py-0.5 bg-dark-700 rounded text-electric-400">NEXT_PUBLIC_SUPABASE_URL</code>
+                  <strong className="text-gray-700 dark:text-dark-300">Variables de entorno:</strong> Verifica que
+                  <code className="mx-1 px-2 py-0.5 bg-gray-200 dark:bg-dark-700 rounded text-electric-500 dark:text-electric-400">NEXT_PUBLIC_SUPABASE_URL</code>
                   y
-                  <code className="mx-1 px-2 py-0.5 bg-dark-700 rounded text-electric-400">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
+                  <code className="mx-1 px-2 py-0.5 bg-gray-200 dark:bg-dark-700 rounded text-electric-500 dark:text-electric-400">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
                   estén configuradas en Vercel
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-electric-500 mt-1">2.</span>
                 <span>
-                  <strong className="text-dark-300">RLS en Supabase:</strong> Ve a Database → Table Editor → leads →
+                  <strong className="text-gray-700 dark:text-dark-300">RLS en Supabase:</strong> Ve a Database → Table Editor → leads →
                   Verifica que exista una policy que permita SELECT
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-electric-500 mt-1">3.</span>
                 <span>
-                  <strong className="text-dark-300">Tabla leads:</strong> Verifica que la tabla exists en Supabase
+                  <strong className="text-gray-700 dark:text-dark-300">Tabla leads:</strong> Verifica que la tabla exists en Supabase
                   y tiene datos de prueba
                 </span>
               </li>
             </ul>
           </div>
 
-          <div className="text-xs text-dark-500 pt-2">
+          <div className="text-xs text-gray-400 dark:text-dark-500 pt-2">
             Abre la consola del navegador (F12) para más detalles
           </div>
         </div>
@@ -276,7 +276,7 @@ export function KanbanBoard() {
   }
 
   return (
-    <div className="overflow-hidden bg-dark-900" style={{ height: 'calc(100vh - 76px)' }}>
+    <div className="overflow-hidden" style={{ height: 'calc(100vh - 76px)' }}>
       <div className="flex-1 flex flex-col overflow-hidden h-full">
         {/* Barra de búsqueda */}
         <div className="px-6 pt-6 pb-4">

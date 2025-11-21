@@ -30,7 +30,7 @@ export function SearchBar({ onSearch, placeholder = 'Buscar prospecto...' }: Sea
         {/* Icono de búsqueda */}
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg
-            className="w-5 h-5 text-dark-400"
+            className="w-5 h-5 text-gray-400 dark:text-dark-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -52,8 +52,8 @@ export function SearchBar({ onSearch, placeholder = 'Buscar prospecto...' }: Sea
           placeholder={placeholder}
           className="
             w-full pl-12 pr-12 py-3
-            bg-dark-800/50 border border-dark-700 rounded-lg
-            text-dark-100 placeholder-dark-500
+            bg-white dark:bg-dark-800/50 border border-gray-300 dark:border-dark-700 rounded-lg
+            text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-500
             focus:outline-none focus:ring-2 focus:ring-electric-500/50 focus:border-electric-500
             transition-all duration-200
           "
@@ -65,7 +65,7 @@ export function SearchBar({ onSearch, placeholder = 'Buscar prospecto...' }: Sea
             onClick={handleClear}
             className="
               absolute inset-y-0 right-0 pr-4 flex items-center
-              text-dark-400 hover:text-dark-200 transition-colors
+              text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-200 transition-colors
             "
             aria-label="Limpiar búsqueda"
           >
@@ -88,8 +88,8 @@ export function SearchBar({ onSearch, placeholder = 'Buscar prospecto...' }: Sea
 
       {/* Indicador de resultados */}
       {query && (
-        <div className="absolute top-full mt-2 text-xs text-dark-400">
-          Buscando por: <span className="text-electric-400 font-medium">{query}</span>
+        <div className="absolute top-full mt-2 text-xs text-gray-500 dark:text-dark-400">
+          Buscando por: <span className="text-electric-500 dark:text-electric-400 font-medium">{query}</span>
         </div>
       )}
     </div>

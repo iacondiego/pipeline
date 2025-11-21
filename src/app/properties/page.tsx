@@ -63,14 +63,14 @@ export default function PropertiesPage() {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-4xl font-bold text-gradient mb-2">Propiedades</h1>
-            <p className="text-dark-400">
+            <p className="text-gray-500 dark:text-dark-400">
               Gestiona tu cartera de propiedades
             </p>
           </div>
           <div className="flex gap-3">
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-6 py-3 text-dark-100 border border-dark-700 rounded-lg hover:border-electric-500 hover:text-electric-500 transition-all duration-200 flex items-center gap-2"
+              className="px-6 py-3 text-gray-700 dark:text-dark-100 border border-gray-300 dark:border-dark-700 rounded-lg hover:border-electric-500 hover:text-electric-500 transition-all duration-200 flex items-center gap-2"
             >
               <svg
                 className="w-5 h-5"
@@ -114,14 +114,14 @@ export default function PropertiesPage() {
           <div className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-dark-400 mb-1">Total</p>
-                <p className="text-3xl font-bold text-dark-100">
+                <p className="text-sm text-gray-500 dark:text-dark-400 mb-1">Total</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-dark-100">
                   {properties.length}
                 </p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-electric-500/20 flex items-center justify-center">
                 <svg
-                  className="w-6 h-6 text-electric-400"
+                  className="w-6 h-6 text-electric-500 dark:text-electric-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -140,8 +140,8 @@ export default function PropertiesPage() {
           <div className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-dark-400 mb-1">Activas</p>
-                <p className="text-3xl font-bold text-green-400">
+                <p className="text-sm text-gray-500 dark:text-dark-400 mb-1">Activas</p>
+                <p className="text-3xl font-bold text-green-500 dark:text-green-400">
                   {properties.filter((p) => p.estado.toLowerCase() === 'activo').length}
                 </p>
               </div>
@@ -166,8 +166,8 @@ export default function PropertiesPage() {
           <div className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-dark-400 mb-1">Reservadas</p>
-                <p className="text-3xl font-bold text-yellow-400">
+                <p className="text-sm text-gray-500 dark:text-dark-400 mb-1">Reservadas</p>
+                <p className="text-3xl font-bold text-yellow-500 dark:text-yellow-400">
                   {properties.filter((p) => p.estado.toLowerCase() === 'reservado').length}
                 </p>
               </div>
@@ -192,8 +192,8 @@ export default function PropertiesPage() {
           <div className="card-glass p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-dark-400 mb-1">Tipos</p>
-                <p className="text-3xl font-bold text-dark-100">
+                <p className="text-sm text-gray-500 dark:text-dark-400 mb-1">Tipos</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-dark-100">
                   {tipos.length}
                 </p>
               </div>
@@ -218,10 +218,10 @@ export default function PropertiesPage() {
 
         {/* Filters */}
         <div className="card-glass p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-dark-100">Filtros</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Filtros</h3>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div>
-              <label className="block text-sm font-medium text-dark-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                 Búsqueda
               </label>
               <div className="flex gap-2">
@@ -231,7 +231,7 @@ export default function PropertiesPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                   placeholder="Buscar..."
-                  className="flex-1 px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="flex-1 px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
                 <button
                   onClick={handleSearch}
@@ -255,13 +255,13 @@ export default function PropertiesPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                 Estado
               </label>
               <select
                 value={filters.estado || ''}
                 onChange={(e) => setFilters({ ...filters, estado: e.target.value || undefined })}
-                className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
               >
                 <option value="">Todos</option>
                 {estados.map((estado) => (
@@ -273,13 +273,13 @@ export default function PropertiesPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                 Tipo
               </label>
               <select
                 value={filters.tipo || ''}
                 onChange={(e) => setFilters({ ...filters, tipo: e.target.value || undefined })}
-                className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
               >
                 <option value="">Todos</option>
                 {tipos.map((tipo) => (
@@ -291,13 +291,13 @@ export default function PropertiesPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                 Barrio
               </label>
               <select
                 value={filters.barrio || ''}
                 onChange={(e) => setFilters({ ...filters, barrio: e.target.value || undefined })}
-                className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
               >
                 <option value="">Todos</option>
                 {barrios.map((barrio) => (
@@ -311,7 +311,7 @@ export default function PropertiesPage() {
             <div className="flex items-end">
               <button
                 onClick={handleClearFilters}
-                className="w-full px-4 py-2 text-dark-400 hover:text-dark-100 border border-dark-700 rounded-lg hover:border-dark-600 transition-colors"
+                className="w-full px-4 py-2 text-gray-500 dark:text-dark-400 hover:text-gray-900 dark:hover:text-dark-100 border border-gray-300 dark:border-dark-700 rounded-lg hover:border-gray-400 dark:hover:border-dark-600 transition-colors"
               >
                 Limpiar filtros
               </button>
@@ -323,7 +323,7 @@ export default function PropertiesPage() {
         {loading ? (
           <div className="card-glass p-8 text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-electric-500 border-t-transparent"></div>
-            <p className="mt-4 text-dark-400">Cargando propiedades...</p>
+            <p className="mt-4 text-gray-500 dark:text-dark-400">Cargando propiedades...</p>
           </div>
         ) : error ? (
           <div className="card-glass p-8 text-center">
@@ -342,8 +342,8 @@ export default function PropertiesPage() {
                 />
               </svg>
             </div>
-            <p className="text-dark-100 font-medium mb-2">Error al cargar propiedades</p>
-            <p className="text-dark-400 text-sm">{error}</p>
+            <p className="text-gray-900 dark:text-dark-100 font-medium mb-2">Error al cargar propiedades</p>
+            <p className="text-gray-500 dark:text-dark-400 text-sm">{error}</p>
           </div>
         ) : (
           <PropertiesTable

@@ -12,7 +12,7 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
   if (properties.length === 0) {
     return (
       <div className="card-glass p-8 text-center">
-        <p className="text-dark-400">No hay propiedades disponibles</p>
+        <p className="text-gray-500 dark:text-dark-400">No hay propiedades disponibles</p>
       </div>
     );
   }
@@ -21,33 +21,33 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
     <div className="card-glass overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="border-b border-dark-700/50">
+          <thead className="border-b border-gray-200 dark:border-dark-700/50">
             <tr className="text-left">
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">ID</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Título</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Dirección</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Tipo</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Barrio</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Estado</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Valor</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">m² Total</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Ambientes</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Agente</th>
-              <th className="px-6 py-4 text-sm font-semibold text-dark-200">Acciones</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">ID</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Título</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Dirección</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Tipo</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Barrio</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Estado</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Valor</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">m² Total</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Ambientes</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Agente</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-dark-200">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-dark-700/30">
+          <tbody className="divide-y divide-gray-200 dark:divide-dark-700/30">
             {properties.map((property) => (
               <tr
                 key={property.id}
-                className="hover:bg-dark-800/30 transition-colors"
+                className="hover:bg-gray-50 dark:hover:bg-dark-800/30 transition-colors"
               >
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   {property.numero || '-'}
                 </td>
                 <td className="px-6 py-4">
                   <div className="max-w-xs">
-                    <p className="text-sm font-medium text-dark-100 truncate">
+                    <p className="text-sm font-medium text-gray-900 dark:text-dark-100 truncate">
                       {property.titulo_publicacion}
                     </p>
                     {property.link && (
@@ -55,7 +55,7 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
                         href={property.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-electric-400 hover:text-electric-300 inline-flex items-center gap-1 mt-1"
+                        className="text-xs text-electric-500 dark:text-electric-400 hover:text-electric-600 dark:hover:text-electric-300 inline-flex items-center gap-1 mt-1"
                       >
                         Ver publicación
                         <svg
@@ -75,13 +75,13 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
                     )}
                   </div>
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300 max-w-xs truncate">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300 max-w-xs truncate">
                   {property.direccion_publicacion}
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   {property.tipo}
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   {property.barrio}
                 </td>
                 <td className="px-6 py-4">
@@ -97,22 +97,22 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
                     {property.estado}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm font-medium text-dark-100">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-dark-100">
                   {property.valor_actual || '-'}
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   {property.m2_total || '-'}
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   {property.ambientes || '-'}
                 </td>
-                <td className="px-6 py-4 text-sm text-dark-300">
+                <td className="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">
                   <div>
                     <p>{property.agente}</p>
                     {property.telefono && (
                       <a
                         href={`tel:${property.telefono}`}
-                        className="text-xs text-electric-400 hover:text-electric-300"
+                        className="text-xs text-electric-500 dark:text-electric-400 hover:text-electric-600 dark:hover:text-electric-300"
                       >
                         {property.telefono}
                       </a>
@@ -123,7 +123,7 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onEdit(property)}
-                      className="p-2 text-dark-400 hover:text-electric-400 transition-colors"
+                      className="p-2 text-gray-400 dark:text-dark-400 hover:text-electric-500 dark:hover:text-electric-400 transition-colors"
                       title="Editar"
                     >
                       <svg
@@ -146,7 +146,7 @@ export function PropertiesTable({ properties, onEdit, onDelete }: PropertiesTabl
                           onDelete(property.id);
                         }
                       }}
-                      className="p-2 text-dark-400 hover:text-red-400 transition-colors"
+                      className="p-2 text-gray-400 dark:text-dark-400 hover:text-red-400 transition-colors"
                       title="Eliminar"
                     >
                       <svg

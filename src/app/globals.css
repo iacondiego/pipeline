@@ -4,40 +4,64 @@
 
 @layer base {
   * {
-    border-color: theme('colors.dark.700');
+    @apply transition-colors duration-300;
   }
 
+  /* Modo Claro (por defecto) */
   body {
-    background-color: theme('colors.dark.900');
-    color: theme('colors.dark.50');
+    @apply bg-white text-gray-900 min-h-screen;
+  }
+
+  /* Modo Oscuro */
+  .dark body {
+    @apply bg-dark-900 text-dark-50;
     background-image: linear-gradient(to bottom right, #0a0a12, #1c1c2a);
-    min-height: 100vh;
   }
 }
 
 @layer utilities {
+  /* Card Glass - Modo Claro */
   .card-glass {
-    @apply bg-dark-800/50 backdrop-blur-sm border border-dark-700/50;
+    @apply bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm;
+  }
+
+  /* Card Glass - Modo Oscuro */
+  .dark .card-glass {
+    @apply bg-dark-800/50 border-dark-700/50;
   }
 
   .card-glass-hover {
-    @apply hover:bg-dark-700/50 hover:border-electric-500/30 hover:shadow-electric;
+    @apply hover:border-electric-500/30 hover:shadow-md transition-all duration-200;
+  }
+
+  .dark .card-glass-hover {
+    @apply hover:bg-dark-700/50 hover:shadow-electric;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-electric-400 to-electric-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-electric-500 to-electric-600;
   }
 
+  /* Scrollbar - Modo Claro */
   .scrollbar-thin::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-track {
-    @apply bg-dark-800 rounded;
+    @apply bg-gray-100 rounded;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded hover:bg-gray-400;
+  }
+
+  /* Scrollbar - Modo Oscuro */
+  .dark .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-dark-800 rounded;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
     @apply bg-dark-600 rounded hover:bg-dark-500;
   }
 }

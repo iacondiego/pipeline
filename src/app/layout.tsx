@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { ThemeProvider } from '@/shared/contexts/ThemeContext'
 
 export const metadata: Metadata = {
   title: 'Setterless - Gestión de Leads en Tiempo Real',
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className="dark">
-      <body className="antialiased">{children}</body>
+    <html lang="es">
+      <body className="antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   )
 }

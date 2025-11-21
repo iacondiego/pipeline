@@ -2,16 +2,18 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTheme } from '@/shared/contexts/ThemeContext'
 
 export function Navigation() {
   const pathname = usePathname()
+  const { theme, toggleTheme } = useTheme()
 
   const isActive = (path: string) => pathname === path
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 card-glass border-r border-dark-700/50 flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-64 card-glass border-r dark:border-dark-700/50 border-gray-200 flex flex-col">
       {/* Logo/Header */}
-      <div className="p-6 border-b border-dark-700/50">
+      <div className="p-6 border-b dark:border-dark-700/50 border-gray-200">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-electric-500 to-electric-600 flex items-center justify-center flex-shrink-0">
             <svg
@@ -39,7 +41,7 @@ export function Navigation() {
           className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
             isActive('/dashboard')
               ? 'bg-electric-500 text-white shadow-electric'
-              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
+              : 'text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800'
           }`}
         >
           <svg
@@ -63,7 +65,7 @@ export function Navigation() {
           className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
             isActive('/pipeline')
               ? 'bg-electric-500 text-white shadow-electric'
-              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
+              : 'text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800'
           }`}
         >
           <svg
@@ -87,7 +89,7 @@ export function Navigation() {
           className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
             isActive('/contacts')
               ? 'bg-electric-500 text-white shadow-electric'
-              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
+              : 'text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800'
           }`}
         >
           <svg
@@ -111,7 +113,7 @@ export function Navigation() {
           className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
             isActive('/properties')
               ? 'bg-electric-500 text-white shadow-electric'
-              : 'text-dark-300 hover:text-electric-400 hover:bg-dark-800'
+              : 'text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800'
           }`}
         >
           <svg
@@ -134,7 +136,7 @@ export function Navigation() {
           href="https://www.ycloud.com/console"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-dark-300 hover:text-electric-400 hover:bg-dark-800"
+          className="w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800"
         >
           <svg
             className="w-5 h-5 flex-shrink-0"
@@ -165,6 +167,51 @@ export function Navigation() {
           </svg>
         </a>
       </nav>
+
+      {/* Theme Toggle Button */}
+      <div className="p-4 border-t dark:border-dark-700/50 border-gray-200">
+        <button
+          onClick={toggleTheme}
+          className="w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-gray-600 dark:text-dark-300 hover:text-electric-500 dark:hover:text-electric-400 hover:bg-gray-100 dark:hover:bg-dark-800"
+          title={theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
+        >
+          {theme === 'light' ? (
+            <>
+              <svg
+                className="w-5 h-5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+              <span className="font-medium">Modo Oscuro</span>
+            </>
+          ) : (
+            <>
+              <svg
+                className="w-5 h-5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <span className="font-medium">Modo Claro</span>
+            </>
+          )}
+        </button>
+      </div>
     </aside>
   )
 }

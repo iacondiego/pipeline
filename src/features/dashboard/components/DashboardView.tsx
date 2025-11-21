@@ -22,7 +22,7 @@ export function DashboardView() {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center space-y-4">
           <div className="w-16 h-16 border-4 border-electric-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-dark-400">Cargando dashboard...</p>
+          <p className="text-gray-500 dark:text-dark-400">Cargando dashboard...</p>
         </div>
       </div>
     )
@@ -49,7 +49,7 @@ export function DashboardView() {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">Error</h3>
-            <p className="text-dark-400">{error}</p>
+            <p className="text-gray-500 dark:text-dark-400">{error}</p>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ export function DashboardView() {
     <div className="space-y-6">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gradient mb-2">Dashboard</h1>
-        <p className="text-dark-400">Métricas y análisis del pipeline</p>
+        <p className="text-gray-500 dark:text-dark-400">Métricas y análisis del pipeline</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -163,10 +163,10 @@ export function DashboardView() {
         <div className="overflow-x-auto scrollbar-thin">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-dark-700">
-                <th className="text-left py-3 px-4 text-dark-400 font-medium">Tipo de Propiedad</th>
-                <th className="text-right py-3 px-4 text-dark-400 font-medium">Cantidad</th>
-                <th className="text-right py-3 px-4 text-dark-400 font-medium">% del Total</th>
+              <tr className="border-b border-gray-200 dark:border-dark-700">
+                <th className="text-left py-3 px-4 text-gray-600 dark:text-dark-400 font-medium">Tipo de Propiedad</th>
+                <th className="text-right py-3 px-4 text-gray-600 dark:text-dark-400 font-medium">Cantidad</th>
+                <th className="text-right py-3 px-4 text-gray-600 dark:text-dark-400 font-medium">% del Total</th>
               </tr>
             </thead>
             <tbody>
@@ -176,7 +176,7 @@ export function DashboardView() {
                   <tr
                     key={property.propertyType}
                     className={`border-b ${colors.border} hover:${colors.bg} transition-colors ${
-                      index % 2 === 0 ? 'bg-dark-900/20' : ''
+                      index % 2 === 0 ? 'bg-gray-50 dark:bg-dark-900/20' : ''
                     }`}
                   >
                     <td className="py-3 px-4">
@@ -189,7 +189,7 @@ export function DashboardView() {
                       <span className={`${colors.text} font-semibold`}>{property.count}</span>
                     </td>
                     <td className="text-right py-3 px-4">
-                      <span className="text-dark-300">{property.percentage.toFixed(1)}%</span>
+                      <span className="text-gray-500 dark:text-dark-300">{property.percentage.toFixed(1)}%</span>
                     </td>
                   </tr>
                 )

@@ -58,7 +58,7 @@ export function KanbanColumn({ column, onUpdateNotes }: KanbanColumnProps) {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              <span className="text-sm text-dark-300">Más buscado:</span>
+              <span className="text-sm text-gray-500 dark:text-dark-300">Más buscado:</span>
               <span className={`text-sm font-semibold ${colors.text}`}>
                 {topProperty[0]} ({topProperty[1]})
               </span>
@@ -72,15 +72,15 @@ export function KanbanColumn({ column, onUpdateNotes }: KanbanColumnProps) {
         className={`
           flex-1 card-glass rounded-b-xl p-4 overflow-y-auto scrollbar-thin space-y-3 min-h-[500px]
           transition-all duration-200
-          ${isOver ? `${colors.bg} border-b-2 ${colors.border}` : 'border-b-2 border-dark-700/50'}
+          ${isOver ? `${colors.bg} border-b-2 ${colors.border}` : 'border-b-2 border-gray-200 dark:border-dark-700/50'}
         `}
       >
         {column.leads.length === 0 ? (
-          <div className="flex items-center justify-center h-32 text-dark-500 text-sm">
+          <div className="flex items-center justify-center h-32 text-gray-400 dark:text-dark-500 text-sm">
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 mx-auto rounded-full bg-dark-800 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto rounded-full bg-gray-100 dark:bg-dark-800 flex items-center justify-center">
                 <svg
-                  className="w-6 h-6 text-dark-600"
+                  className="w-6 h-6 text-gray-400 dark:text-dark-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
