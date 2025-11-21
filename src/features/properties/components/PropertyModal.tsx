@@ -101,14 +101,14 @@ export function PropertyModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
-      <div className="card-glass max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-dark-900/95 backdrop-blur-sm p-6 border-b border-dark-700/50 flex justify-between items-center">
+      <div className="card-glass max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl">
+        <div className="sticky top-0 bg-white/95 dark:bg-dark-900/95 backdrop-blur-sm p-6 border-b border-gray-200 dark:border-dark-700/50 flex justify-between items-center rounded-t-xl">
           <h2 className="text-2xl font-bold text-gradient">
             {mode === 'create' ? 'Nueva Propiedad' : 'Editar Propiedad'}
           </h2>
           <button
             onClick={onClose}
-            className="text-dark-400 hover:text-dark-100 transition-colors"
+            className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-100 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -124,10 +124,10 @@ export function PropertyModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Información Básica */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Información Básica</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Información Básica</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Título Publicación *
                 </label>
                 <input
@@ -137,12 +137,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, titulo_publicacion: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Property ID *
                 </label>
                 <input
@@ -152,12 +152,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, property_id: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Dirección *
                 </label>
                 <input
@@ -167,12 +167,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, direccion_publicacion: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Propiedad *
                 </label>
                 <input
@@ -182,12 +182,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, propiedad: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Barrio *
                 </label>
                 <input
@@ -197,19 +197,19 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, barrio: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Tipo *
                 </label>
                 <select
                   required
                   value={formData.tipo}
                   onChange={(e) => setFormData({ ...formData, tipo: e.target.value })}
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 >
                   <option value="">Seleccionar tipo</option>
                   <option value="Casa">Casa</option>
@@ -224,14 +224,14 @@ export function PropertyModal({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Estado *
                 </label>
                 <select
                   required
                   value={formData.estado}
                   onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 >
                   <option value="activo">Activo</option>
                   <option value="Reservado">Reservado</option>
@@ -241,14 +241,14 @@ export function PropertyModal({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Operación *
                 </label>
                 <select
                   required
                   value={formData.operacion}
                   onChange={(e) => setFormData({ ...formData, operacion: e.target.value })}
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 >
                   <option value="Venta">Venta</option>
                   <option value="Alquiler">Alquiler</option>
@@ -260,10 +260,10 @@ export function PropertyModal({
 
           {/* Detalles de la Propiedad */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Detalles</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Detalles</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Ambientes
                 </label>
                 <input
@@ -272,12 +272,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, ambientes: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Piso
                 </label>
                 <input
@@ -286,12 +286,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, piso: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Número
                 </label>
                 <input
@@ -300,7 +300,7 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, numero: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
             </div>
@@ -308,10 +308,10 @@ export function PropertyModal({
 
           {/* Superficies */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Superficies (m²)</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Superficies (m²)</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   m² Cubiertos
                 </label>
                 <input
@@ -321,12 +321,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, m2_cubiertos: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   m² Semicubiertos
                 </label>
                 <input
@@ -336,12 +336,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, m2_semicubiertos: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   m² Descubiertos
                 </label>
                 <input
@@ -351,12 +351,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, m2_descubiertos: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   m² Total
                 </label>
                 <input
@@ -366,7 +366,7 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, m2_total: e.target.value ? Number(e.target.value) : null })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
             </div>
@@ -374,10 +374,10 @@ export function PropertyModal({
 
           {/* Valores */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Valores</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Valores</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Valor Actual
                 </label>
                 <input
@@ -387,12 +387,12 @@ export function PropertyModal({
                     setFormData({ ...formData, valor_actual: e.target.value })
                   }
                   placeholder="U$D100.000"
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Valor Anterior
                 </label>
                 <input
@@ -402,12 +402,12 @@ export function PropertyModal({
                     setFormData({ ...formData, valor_anterior: e.target.value })
                   }
                   placeholder="U$D120.000"
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Expensas
                 </label>
                 <input
@@ -417,7 +417,7 @@ export function PropertyModal({
                     setFormData({ ...formData, expensas: e.target.value })
                   }
                   placeholder="$50.000"
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
             </div>
@@ -425,10 +425,10 @@ export function PropertyModal({
 
           {/* Agente */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Información del Agente</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Información del Agente</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Agente *
                 </label>
                 <input
@@ -438,12 +438,12 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, agente: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Teléfono *
                 </label>
                 <input
@@ -453,7 +453,7 @@ export function PropertyModal({
                   onChange={(e) =>
                     setFormData({ ...formData, telefono: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
             </div>
@@ -461,10 +461,10 @@ export function PropertyModal({
 
           {/* Otros */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-dark-100">Otros</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">Otros</h3>
             <div className="grid grid-cols-1 gap-4">
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Link Publicación *
                 </label>
                 <input
@@ -475,12 +475,12 @@ export function PropertyModal({
                     setFormData({ ...formData, link: e.target.value })
                   }
                   placeholder="https://..."
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Amenities
                 </label>
                 <textarea
@@ -490,12 +490,12 @@ export function PropertyModal({
                   }
                   rows={3}
                   placeholder="Gimnasio, SUM, Piscina..."
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none resize-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-200 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-200 mb-2">
                   Modalidad de Visitas
                 </label>
                 <input
@@ -505,18 +505,18 @@ export function PropertyModal({
                     setFormData({ ...formData, modalidad_visitas: e.target.value })
                   }
                   placeholder="coordinar, llave, desarrollo"
-                  className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
+                  className="w-full px-4 py-2 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg text-gray-900 dark:text-dark-100 focus:border-electric-500 focus:ring-1 focus:ring-electric-500 outline-none"
                 />
               </div>
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-4 pt-6 border-t border-dark-700/50">
+          <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 dark:border-dark-700/50">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 text-dark-300 hover:text-dark-100 transition-colors"
+              className="px-6 py-2 text-gray-600 dark:text-dark-300 hover:text-gray-900 dark:hover:text-dark-100 transition-colors"
               disabled={saving}
             >
               Cancelar
